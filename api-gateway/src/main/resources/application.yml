@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: user-service
+              uri: lb://user-service
+              predicates:
+                - Path=/user/**
+            - id: address-service
+              uri: lb://address-service
+              predicates:
+                - Path=/address/**
+            - id: department-service
+              uri: lb://department-service
+              predicates:
+                - Path=/department/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

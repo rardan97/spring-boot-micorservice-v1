@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  eurekaserver:
+    build:
+      context: ./eureka-server
+    container_name: eurekaserver
+    ports:
+      - "8761:8761"
+
+  postgres:
+    image: postgres:15
+    container_name: postgres-microservice-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: userdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  userservice:
+    build:
+      context: ./user-service
+    container_name: user-service
+    depends_on:
+      - eurekaserver
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/userdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8761/eureka/
+    ports:
+      - "8081:8081"
+
+  departmentservice:
+    build:
+      context: ./department-service
+    container_name: department-service
+    depends_on:
+      - eurekaserver
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/departmentdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8761/eureka/
+    ports:
+      - "8083:8083"
+  
+  addressservice:
+    build:
+      context: ./address-service
+    container_name: address-service
+    depends_on:
+      - eurekaserver
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/addressdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8761/eureka/
+    ports:
+      - "8082:8082"
+
+  apigateway:
+    build:
+      context: ./api-gateway
+    container_name: api-gateway
+    depends_on:
+      - eurekaserver
+      - userservice
+      - departmentservice
+      - addressservice
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8761/eureka/
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:
