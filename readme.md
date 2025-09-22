@@ -10,6 +10,15 @@ Proyek ini mengimplementasikan arsitektur microservices sederhana menggunakan:
 
 ---
 
+
+## Architecture Diagram
+
+<p align="center">
+  <img src="diagram.png" alt="Architecture Diagram" width="700"/>
+</p>
+
+---
+
 ## Struktur Microservices
 
 Service	Deskripsi
