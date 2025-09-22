@@ -1,6 +1,8 @@
 # Microservices Architecture: (Spring Boot + PostgreSQL + API Gateway + Eureka + Docker + Swagger)
 
-Proyek ini mengimplementasikan arsitektur microservices sederhana menggunakan:
+This project is an implementation of a microservices architecture that divides the application into a set of small, independent, and separate services. Each service has a specific responsibility and can be developed and tested individually. This approach simplifies scalability and streamlines the management and maintenance of the overall system.
+
+This project implements a microservices architecture using:
 
 - Spring Boot (Web & WebFlux)
 - PostgreSQL
@@ -10,7 +12,6 @@ Proyek ini mengimplementasikan arsitektur microservices sederhana menggunakan:
 
 ---
 
-
 ## Architecture Diagram
 
 <p align="center">
@@ -19,41 +20,30 @@ Proyek ini mengimplementasikan arsitektur microservices sederhana menggunakan:
 
 ---
 
-## Struktur Microservices
 
-Service	Deskripsi
+## Services Overview
 
-- api-gateway	Routing permintaan ke setiap service
-- eureka-server	Service registry (pendaftaran & lookup)
-- user-service	Manajemen data pengguna
-- department-service	Manajemen data departemen
-- address-service	Manajemen data alamat
-- PostgreSQL	Database untuk masing-masing service
-- Swagger / OpenAPI (springdoc-openapi) untuk dokumentasi API
+- api-gateway – Routes requests to the appropriate service
+- eureka-server – Service registry (for registration and lookup of services)
+- user-service – Manages user data
+- department-service – Manages department data
+- address-service – Manages address data
+
 
 ## Dependencies
 
-
 ### Api-Gateway
-
-Digunakan untuk mengatur routing request client ke service internal.
-
 - `spring-cloud-starter-gateway-server-webflux`  
 - `spring-boot-starter-webflux`  
 - `spring-cloud-starter-netflix-eureka-client`  
 - `springdoc-openapi-starter-webflux-ui`  
 
----
 
 ### Eureka Server
-
-Digunakan sebagai service registry yang mencatat semua service aktif.
-
 - `spring-boot-starter-web`  
 - `spring-cloud-starter-netflix-eureka-server`  
 - `spring-boot-starter-actuator`
 
----
 
 ### Service-User
 - `spring-boot-starter-web`  
@@ -64,8 +54,6 @@ Digunakan sebagai service registry yang mencatat semua service aktif.
 - `springdoc-openapi-starter-webmvc-ui`
 - `postgresql`  
 - `lombok`  
-
----
 
 ### Service-Department
 - `spring-boot-starter-web`  
@@ -83,15 +71,20 @@ Digunakan sebagai service registry yang mencatat semua service aktif.
 - `postgresql`  
 - `lombok`  
 
+---
+
 
 ## Database
 
-Setiap service memiliki database PostgreSQL terpisah:
+Each service has its own separate PostgreSQL database:
 - userdb
 - departmentdb
 - addressdb
 
-## configuration
+
+---
+
+## Configuration
 
 
 ### api-gateway (application.yml)
@@ -277,17 +270,42 @@ eureka:
     fetch-registry: true
 ```
 
-## Dokumentasi API (Swagger UI)
+---
 
-Dokumentasi API dengan Swagger UI dapat di access di Base URL ini :
+## Docker & Deployment
 
+This project is fully integrated with:
+
+- Docker for containerization
+- Automated health checks and restart policies
+- To run all services together:
+
+
+## Run Project
+```
+docker-compose up --build
+```
+
+## Stop Project
+```
+docker-compose down
+```
+
+---
+
+## API Documentation (Swagger UI)
+
+The API documentation using Swagger UI can be accessed at the following base URL:
+```
 http://localhost:8080/swagger-ui/index.html
-
+```
 
 ## API Endpoints
 
-Semua request dikirim melalui API Gateway pada http://localhost:8080.
-
+All requests are sent through the API Gateway at:
+```
+http://localhost:8080.
+```
 ---
 
 ### Service: Address 
@@ -302,7 +320,6 @@ Base URL: `http://localhost:8080/api/address`
 | PUT    | `/updateAddress/{id}`    | Update address      |
 | DELETE | `/deleteAddress/{id}`    | Delete address      |
 
----
 
 ### Service: Department 
 
@@ -316,7 +333,6 @@ Base URL: `http://localhost:8080/api/department`
 | PUT    | `/updateDepartment/{id}`    | Update department    |
 | DELETE | `/deleteDepartment/{id}`    | Delete department    |
 
----
 
 
 ### Service: User
@@ -330,25 +346,3 @@ Base URL: `http://localhost:8080/api/user`
 | POST   | `/addUser`            | Create new user  |
 | PUT    | `/updateUser/{id}`    | Update user      |
 | DELETE | `/deleteUser/{id}`    | Delete user      |
-
----
-
-## Docker & Deployment
-
-Project ini sudah terintegrasi penuh dengan:
-
-- Docker untuk containerization
-- Health check otomatis dan restart policy
-- Untuk menjalankan semua service:
-
-
-
-Run Project
-```
-docker-compose up --build
-```
-
-Stop Project
-```
-docker-compose down
-```
