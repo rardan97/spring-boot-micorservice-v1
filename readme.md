@@ -1,4 +1,4 @@
-# Microservices Architecture: Spring Boot + PostgreSQL + API Gateway + Eureka + Docker + Swagger
+# Microservices Architecture: (Spring Boot + PostgreSQL + API Gateway + Eureka + Docker + Swagger)
 
 Proyek ini mengimplementasikan arsitektur microservices sederhana menggunakan:
 
@@ -6,7 +6,7 @@ Proyek ini mengimplementasikan arsitektur microservices sederhana menggunakan:
 - PostgreSQL
 - API Gateway (Spring Cloud Gateway)
 - Eureka Server (Service Registry & Discovery)
-- Docker + Docker Compose
+- Docker
 
 ---
 
