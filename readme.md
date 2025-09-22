@@ -15,7 +15,7 @@ This project implements a microservices architecture using:
 ## Architecture Diagram
 
 <p align="center">
-  <img src="diagram_flow.png" alt="Architecture Diagram" width="700"/>
+  <img src="diagram_flow1.png" alt="Architecture Diagram" width="700"/>
 </p>
 
 
