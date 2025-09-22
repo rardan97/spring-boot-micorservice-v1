@@ -2,6 +2,8 @@ server:
   port: 8081
 
 spring:
+  application:
+    name: user-service
   datasource:
     url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
@@ -14,7 +16,16 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
+springdoc:
+  api-docs:
+    path: /api/user/v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://eurekaserver:8761/eureka/}
+    register-with-eureka: true
+    fetch-registry: true

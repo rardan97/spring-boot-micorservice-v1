@@ -2,6 +2,9 @@ server:
   port: 8080
 
 spring:
+  application:
+    name: api-gateway
+
   cloud:
     gateway:
       server:
@@ -10,17 +13,35 @@ spring:
             - id: user-service
               uri: lb://user-service
               predicates:
-                - Path=/user/**
+                - Path=/api/user/**
+              filters:
+                - RewritePath=/api/user/(?<segment>.*), /api/user/${segment}
             - id: address-service
               uri: lb://address-service
               predicates:
-                - Path=/address/**
+                - Path=/api/address/**
+              filters:
+                - RewritePath=/api/address/(?<segment>.*), /api/address/${segment}
             - id: department-service
               uri: lb://department-service
               predicates:
-                - Path=/department/**
+                - Path=/api/department/**
+              filters:
+                - RewritePath=/api/department/(?<segment>.*), /api/department/${segment}
+
+springdoc:
+  swagger-ui:
+    urls:
+      - url: /api/user/v3/api-docs
+        name: User Service
+      - url: /api/address/v3/api-docs
+        name: Address Service
+      - url: /api/department/v3/api-docs
+        name: Department Service
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://eurekaserver:8761/eureka/}
+    register-with-eureka: true
+    fetch-registry: true
