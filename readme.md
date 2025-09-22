@@ -10,15 +10,15 @@ This project implements a microservices architecture using:
 - Eureka Server (Service Registry & Discovery)
 - Docker
 
----
+
 
 ## Architecture Diagram
 
 <p align="center">
-  <img src="diagram.png" alt="Architecture Diagram" width="700"/>
+  <img src="diagram_flow.png" alt="Architecture Diagram" width="700"/>
 </p>
 
----
+
 
 
 ## Services Overview
@@ -71,7 +71,7 @@ This project implements a microservices architecture using:
 - `postgresql`  
 - `lombok`  
 
----
+
 
 
 ## Database
@@ -82,7 +82,7 @@ Each service has its own separate PostgreSQL database:
 - addressdb
 
 
----
+
 
 ## Configuration
 
@@ -270,7 +270,7 @@ eureka:
     fetch-registry: true
 ```
 
----
+
 
 ## Docker & Deployment
 
@@ -291,7 +291,7 @@ docker-compose up --build
 docker-compose down
 ```
 
----
+
 
 ## API Documentation (Swagger UI)
 
@@ -306,7 +306,7 @@ All requests are sent through the API Gateway at:
 ```
 http://localhost:8080.
 ```
----
+
 
 ### Service: Address 
 
