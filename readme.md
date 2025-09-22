@@ -56,9 +56,6 @@ Digunakan sebagai service registry yang mencatat semua service aktif.
 ---
 
 ### Service-User
-
-Mengelola data pengguna.
-
 - `spring-boot-starter-web`  
 - `spring-boot-starter-data-jpa`
 - `spring-boot-starter-webflux`  
@@ -71,9 +68,6 @@ Mengelola data pengguna.
 ---
 
 ### Service-Department
-
-Masing-masing bertugas mengelola data departemen.
-
 - `spring-boot-starter-web`  
 - `spring-boot-starter-data-jpa`  
 - `spring-cloud-starter-netflix-eureka-client`
@@ -82,9 +76,6 @@ Masing-masing bertugas mengelola data departemen.
 - `lombok`  
 
 ### Service-Address
-
-Masing-masing bertugas mengelola data alamat.
-
 - `spring-boot-starter-web`  
 - `spring-boot-starter-data-jpa`  
 - `spring-cloud-starter-netflix-eureka-client`
@@ -96,8 +87,8 @@ Masing-masing bertugas mengelola data alamat.
 ## Database
 
 Setiap service memiliki database PostgreSQL terpisah:
-- userdb, 
-- departmentdb, 
+- userdb
+- departmentdb
 - addressdb
 
 ## configuration
@@ -288,21 +279,9 @@ eureka:
 
 ## Dokumentasi API (Swagger UI)
 
-Swagger UI disediakan oleh setiap service melalui springdoc-openapi.
+Dokumentasi API dengan Swagger UI dapat di access di Base URL ini :
 
-🔍 Akses Swagger via API Gateway
-
-API Gateway telah dikonfigurasi untuk mengarahkan ke dokumentasi setiap service. Kunjungi:
-
-Service	URL Swagger UI
-User Service	/api/user/swagger-ui.html
-
-Address Service	/api/address/swagger-ui.html
-
-Department	/api/department/swagger-ui.html
-
-Swagger ini memberikan dokumentasi otomatis untuk semua endpoint HTTP dan bisa digunakan untuk menguji API secara langsung.
-
+http://localhost:8080/swagger-ui/index.html
 
 
 ## API Endpoints
